@@ -9,7 +9,7 @@
 <body>
 	<div>Questa è una landing page</div>
 	<%
-		response.getWriter().print("MESSAGGIO DA JAVA");
+	response.getWriter().print("MESSAGGIO DA JAVA");
 	%>
 </body>
 </html>

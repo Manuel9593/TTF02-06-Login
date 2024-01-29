@@ -30,12 +30,9 @@ public class UserRepository {
 	
 	public User get(String login, String password) {
 		User u = users.get(login);
-		System.out.println(u != null);
-		if (u != null) {
-			System.out.println(u.getPassword()+", "+password);
+		if (u != null)
 			if(u.getPassword().equals(password))
-				return u;			
-		}
+				return u;
 		return null;
 	}
 	

@@ -26,15 +26,14 @@ public class LoginServlet extends HttpServlet {
 		String l = request.getParameter("login");
 		String p = request.getParameter("password");
 		User u = UserRepository.getInstance().get(l, p);
-		if(request.getCookies() != null)
-			for(Cookie c : request.getCookies())
-				log.info(c.toString());
+//		if(request.getCookies() != null)
+//			for(Cookie c : request.getCookies())
+//				log.info(c.toString());
 			
 		if (u != null) {
 			log.info("mi sto loggando come utente {}", 1);
-			Cookie c = new Cookie("user", u.getLogin());
-			response.addCookie(c);
-			response.sendRedirect("./dettagli?user="+u.getLogin());
+			Utils.setUser(request, u);
+			response.sendRedirect("./home.jsp?user="+u.getLogin());
 		} else
 			response.sendRedirect(".?err");
 	}

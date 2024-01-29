@@ -4,19 +4,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
 /**
  * Servlet implementation class IndexServlet
  */
-@Slf4j
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String err = request.getParameter("err");
+		/*
+		 * Cookie c = new Copkie("utente", ""))
+		 */
 		String html = "<!DOCTYPE html>\r\n"
 				+ "<html>\r\n"
 				+ "<head>\r\n"
