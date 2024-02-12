@@ -21,7 +21,7 @@ public class Logout extends HttpServlet {
 		User u = Utils.checkUser(request, response);
 		if(u != null)
 			Utils.setUser(request, null);
-		response.sendRedirect("/");
+		response.sendRedirect("./");
 	}
 
 }

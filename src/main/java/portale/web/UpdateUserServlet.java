@@ -21,9 +21,22 @@ public class UpdateUserServlet extends HttpServlet {
 		User u = Utils.checkUser(request, response);
 		if(u == null)
 			return;
-		u.setName(request.getParameter("name"));
-		u.setSurname(request.getParameter("surname"));
-		response.sendRedirect("dettagli.jsp?update-user=ok");
+		String nameParam = request.getParameter("name");
+		String surnameParam = request.getParameter("surname");
+		if (nameParam != null && surnameParam != null) {
+			if(!nameParam.trim().isEmpty() && !surnameParam.trim().isEmpty()) {
+				u.setName(nameParam);
+				u.setSurname(surnameParam);
+				response.sendRedirect("dettagli.jsp?update-user=ok");
+			} else if (nameParam.trim().isEmpty())
+				response.sendRedirect("dettagli.jsp?update-user=name");
+			else
+				response.sendRedirect("dettagli.jsp?update-user=surname");
+		} else if (nameParam == null)
+			response.sendRedirect("dettagli.jsp?update-user=name");
+		else
+			response.sendRedirect("dettagli.jsp?update-user=surname");
+		
 	}
 
 }

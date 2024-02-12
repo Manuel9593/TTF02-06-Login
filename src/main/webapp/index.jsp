@@ -10,16 +10,16 @@
 		<title>Portale admins</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	<body>
-		<div class="d-flex flex-column h-100 justify-content-strech align-content-center p-4">
+	<body class="h-100" style="minHeight: 100%">
+		<div class="d-flex flex-column h-100 justify-content-strech align-content-center p-4 align-middle">
 			<form class="container-sm" action="login" method="post" style="{ max-width: 400px }">
 				<div class="p-1 form-floating">
-					<input type="text" id="login" class="form-control <% out.println(err!=null ? "is-invalid" : ""); %>" name="login" required>
+					<input type="text" id="login" class="form-control <% out.println(err!=null ? "is-invalid" : ""); %>" name="login" placeholder="Nome utente" required>
 					<label for="login">Nome utente</label>
 					<div class="invalid-feedback">Non esiste utente con questo username</div>
 				</div>
 				<div class="p-1 form-floating">
-					<input type="password" id="password" class="form-control  <% out.println(err!=null ? "is-invalid" : ""); %>" name="password" required>
+					<input type="password" id="password" class="form-control  <% out.println(err!=null ? "is-invalid" : ""); %>" name="password" placeholder="Password" required>
 					<label for="password">Password</label>
 					<div class="invalid-feedback">La password non corrisponde</div>
 				</div>

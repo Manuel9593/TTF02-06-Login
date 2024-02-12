@@ -1,6 +1,8 @@
 package portale.backend;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserRepository {
@@ -36,6 +38,11 @@ public class UserRepository {
 		return null;
 	}
 	
+	public List<User> getAll(){
+		ArrayList<User> list = new ArrayList<>();
+		users.forEach((key, user) -> list.add(user));
+		return list;
+	}
 	public void remove(String login) {
 		users.remove(login);
 	}

@@ -44,4 +44,24 @@
     <servlet-name>update-password</servlet-name>
     <url-pattern>/update-password</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>add-product</display-name>
+    <servlet-name>add-product</servlet-name>
+    <servlet-class>portale.backend.AddProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>add-product</servlet-name>
+    <url-pattern>/add-product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>remove-product</display-name>
+    <servlet-name>remove-product</servlet-name>
+    <servlet-class>portale.backend.RemoveProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>remove-product</servlet-name>
+    <url-pattern>/remove-product</url-pattern>
+  </servlet-mapping>
 </web-app>

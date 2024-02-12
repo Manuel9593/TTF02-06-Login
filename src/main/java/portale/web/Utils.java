@@ -5,6 +5,7 @@ import java.io.IOException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import portale.backend.Cart;
 import portale.backend.User;
 
 public class Utils {
@@ -24,5 +25,12 @@ public class Utils {
 	
 	public static void setUser(HttpServletRequest request, User u) {
 		request.getSession().setAttribute("utente", u);
+	}
+	
+	public static Cart getCart(HttpServletRequest req) {
+		Cart c = (Cart) req.getSession().getAttribute("cart");
+		if (c == null)
+			req.getSession().setAttribute("cart", c = new Cart());
+		return c;
 	}
 }

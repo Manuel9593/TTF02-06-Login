@@ -1,0 +1,65 @@
+<taglib>
+	<tlibversion>1.0</tlibversion>
+    <jspversion>1.1</jspversion>
+    <shortname>test</shortname>
+    <info>My first Custom Tag</info>
+    <tag>
+        <name>hello</name>
+        <tagclass>portale.web.HelloTag</tagclass>
+        <bodycontent>scriptless</bodycontent>
+        <info>A simple Hello Tag</info>
+        <attribute>
+        	<name>msg</name>
+        </attribute>
+    </tag>
+    <tag>
+        <name>check-user</name>
+        <tagclass>portale.web.CheckUserTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>Tag to check user in cookie</info>
+        <attribute>
+        	<name>var</name>
+        	<required>true</required>>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>cart</name>
+        <tagclass>portale.web.CartTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>Tag to check user in cookie</info>
+        <attribute>
+        	<name>add</name>
+        	<required>true</required>
+        </attribute>
+        <attribute>
+        	<name>product</name>
+        	<required>true</required>
+        </attribute>
+        <attribute>
+        	<name>cart</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>user</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>cart-row</name>
+        <tagclass>portale.web.CartRowTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>Tag to check user in cookie</info>
+        <attribute>
+        	<name>product</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>remove</name>
+        	<required>true</required>
+        </attribute>
+    </tag>
+</taglib>
