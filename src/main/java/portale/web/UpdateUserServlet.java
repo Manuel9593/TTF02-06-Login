@@ -5,8 +5,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import portale.backend.User;
+import portale.backend.UserRepository;
 
 import java.io.IOException;
+import java.lang.Exception;
 
 /**
  * Servlet implementation class UpdateUserServlet
@@ -27,6 +29,11 @@ public class UpdateUserServlet extends HttpServlet {
 			if(!nameParam.trim().isEmpty() && !surnameParam.trim().isEmpty()) {
 				u.setName(nameParam);
 				u.setSurname(surnameParam);
+				try {
+					UserRepository.getInstance().update(u);
+				} catch (Exception e) {
+					throw new ServletException(e);
+				}
 				response.sendRedirect("dettagli.jsp?update-user=ok");
 			} else if (nameParam.trim().isEmpty())
 				response.sendRedirect("dettagli.jsp?update-user=name");

@@ -5,7 +5,7 @@
     <info>My first Custom Tag</info>
     <tag>
         <name>hello</name>
-        <tagclass>portale.web.HelloTag</tagclass>
+        <tagclass>portale.web.tags.HelloTag</tagclass>
         <bodycontent>scriptless</bodycontent>
         <info>A simple Hello Tag</info>
         <attribute>
@@ -14,26 +14,30 @@
     </tag>
     <tag>
         <name>check-user</name>
-        <tagclass>portale.web.CheckUserTag</tagclass>
+        <tagclass>portale.web.tags.CheckUserTag</tagclass>
         <bodycontent>empty</bodycontent>
         <info>Tag to check user in cookie</info>
         <attribute>
         	<name>var</name>
-        	<required>true</required>>
-        	<rtexprvalue>true</rtexprvalue>
+        	<required>true</required>
+        	<rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>admin</name>
+        	<rtexprvalue>false</rtexprvalue>
         </attribute>
     </tag>
     <tag>
         <name>cart</name>
-        <tagclass>portale.web.CartTag</tagclass>
-        <bodycontent>empty</bodycontent>
+        <tagclass>portale.web.tags.CartTag</tagclass>
+        <bodycontent>scriptless</bodycontent>
         <info>Tag to check user in cookie</info>
         <attribute>
-        	<name>add</name>
+        	<name>product</name>
         	<required>true</required>
         </attribute>
         <attribute>
-        	<name>product</name>
+        	<name>add</name>
         	<required>true</required>
         </attribute>
         <attribute>
@@ -49,17 +53,16 @@
     </tag>
     <tag>
         <name>cart-row</name>
-        <tagclass>portale.web.CartRowTag</tagclass>
+        <tagclass>portale.web.tags.CartRowTag</tagclass>
         <bodycontent>empty</bodycontent>
-        <info>Tag to check user in cookie</info>
-        <attribute>
+   		<attribute>
         	<name>product</name>
-        	<required>true</required>
+         	<required>true</required>
         	<rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
+    	</attribute>
+   		<attribute>
         	<name>remove</name>
-        	<required>true</required>
-        </attribute>
+         	<required>true</required>
+    	</attribute>
     </tag>
 </taglib>

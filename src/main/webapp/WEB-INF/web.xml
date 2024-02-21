@@ -4,6 +4,10 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/errors/error400.jsp</location>
+  </error-page>
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -18,7 +22,7 @@
     <description></description>
     <display-name>logout</display-name>
     <servlet-name>logout</servlet-name>
-    <servlet-class>portale.web.Logout</servlet-class>
+    <servlet-class>portale.web.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>logout</servlet-name>
@@ -38,7 +42,7 @@
     <description></description>
     <display-name>update-password</display-name>
     <servlet-name>update-password</servlet-name>
-    <servlet-class>portale.web.UpdatePassword</servlet-class>
+    <servlet-class>portale.web.UpdatePasswordServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>update-password</servlet-name>
@@ -46,9 +50,29 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>add-to-cart</display-name>
+    <servlet-name>add-to-cart</servlet-name>
+    <servlet-class>portale.backend.AddToCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>add-to-cart</servlet-name>
+    <url-pattern>/add-to-cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>remove-from-cart</display-name>
+    <servlet-name>remove-from-cart</servlet-name>
+    <servlet-class>portale.backend.RemoveFromCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>remove-from-cart</servlet-name>
+    <url-pattern>/remove-from-cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>add-product</display-name>
     <servlet-name>add-product</servlet-name>
-    <servlet-class>portale.backend.AddProductServlet</servlet-class>
+    <servlet-class>portale.web.AddProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>add-product</servlet-name>
@@ -58,10 +82,20 @@
     <description></description>
     <display-name>remove-product</display-name>
     <servlet-name>remove-product</servlet-name>
-    <servlet-class>portale.backend.RemoveProductServlet</servlet-class>
+    <servlet-class>portale.web.RemoveProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>remove-product</servlet-name>
     <url-pattern>/remove-product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>get-products</display-name>
+    <servlet-name>get-products</servlet-name>
+    <servlet-class>portale.web.GetProducts</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>get-products</servlet-name>
+    <url-pattern>/get-products</url-pattern>
   </servlet-mapping>
 </web-app>

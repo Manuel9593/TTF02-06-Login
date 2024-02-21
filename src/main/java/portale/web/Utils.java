@@ -23,6 +23,15 @@ public class Utils {
 		return u;
 	}
 	
+	public static User checkUser(HttpServletRequest req, HttpServletResponse resp, boolean admin) throws IOException {
+		User u = (User) req.getSession().getAttribute("utente");
+		if (u!=null && admin && !u.isAdmin())
+			u=null;
+		if (u==null)
+			resp.sendRedirect(".?err");
+		return u;		
+	}
+	
 	public static void setUser(HttpServletRequest request, User u) {
 		request.getSession().setAttribute("utente", u);
 	}

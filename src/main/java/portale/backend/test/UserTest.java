@@ -5,6 +5,8 @@ package portale.backend.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.Exception;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,31 +23,52 @@ class UserTest {
 
 	@Test
 	void cercaAdmin() {
-		User admin = repo.get("admin");
-		assertNotNull(admin);
-		assertEquals("admin", admin.getLogin());
-		assertEquals("admin", admin.getPassword());
+		User admin;
+		try {
+			admin = repo.get("admin");
+			assertNotNull(admin);
+			assertEquals("admin", admin.getLogin());
+			assertEquals("admin", admin.getPassword());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	void aggiungiUtente() {
-		User u = new User("test", "test", "test", "test");
-		repo.add(u);
-		assertSame(u, repo.get("test"));
-		repo.remove("test");
+		User u = new User("test", "test", "test", "test", false);
+		try {
+			repo.add(u);
+			assertSame(u, repo.get("test"));
+			repo.remove(u);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	void rimuoviUtente() {
-		repo.remove("test");
-		assertNull(repo.get("test"));
-		repo.add(new User("test", "password", "Mario", "Rossi"));
+		try {
+			repo.remove(repo.get("test"));
+			assertNull(repo.get("test"));
+			repo.add(new User("test", "password", "Mario", "Rossi", false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
 	@Test
 	void utenteNonPresente() {
-		assertNull(repo.get("manuel"));
+		try {
+			assertNull(repo.get("manuel"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -1,18 +1,21 @@
-package portale.web;
+package portale.web.tags;
 
 import java.io.IOException;
 
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import portale.backend.Cart;
 import portale.backend.User;
 
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class CartTag extends TagSupport {
 	private static final long serialVersionUID = 2834967346098310333L;
 	private String add, product;
 	private Cart cart;
 	private User user;
-	
 	private int index = 0;
 	
 	private void print(String msg) throws JspException {

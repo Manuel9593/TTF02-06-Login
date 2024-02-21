@@ -1,45 +1,77 @@
 package portale.backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.hibernate.HibernateException;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Slf4j
 public class ProductRepository {
-	private Map<Integer, Product> products = new HashMap<>();
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("portale");
 	private static ProductRepository instance = null;
-	
 	public static ProductRepository getInstance() {
 		if(instance == null) {
 			instance = new ProductRepository();
-			instance.add(new Product(0, "scarpe", 50));
-			instance.add(new Product(1, "giubbotto", 120));
-			instance.add(new Product(2, "PC", 900));
-			instance.add(new Product(3, "maglione", 45));
 		}
 		return instance;
 	}
-	
-	public void add(Product p) {
-		products.put(p.getId(), p);
+
+	private static Product toProduct(String name, int price) {
+		Product product = new Product();
+		product.setName(name);
+		product.setPrice(price);
+		return product;
 	}
 	
-	public void remove(Product p) {
-		products.remove(p.getId());
+	public Product get(int id) throws HibernateException {
+		EntityManager em = emf.createEntityManager();
+		Product p = em.find(Product.class, id);
+		log.info(em.toString());
+		em.close();
+		return p;
 	}
 	
-	public Product get(int id) {
-		return products.get(id);
-	}
-	
-	public List<Product> getProducts() {
-		List<Product> res = new ArrayList<>();
-		products.values().forEach(p->res.add(p));
+	public List<Product> getProducts() throws HibernateException {
+		EntityManager em = emf.createEntityManager();
+		List<Product> res = em.createQuery("select p from Product p", Product.class).getResultList();
+		em.close();
 		return res;
+	}
+	
+	public Product add(String name, int price) throws HibernateException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Product p = toProduct(name, price);
+		em.persist(p);
+		em.getTransaction().commit();
+		em.close();
+		return p;
+	}
+	
+	public void update(Product p) throws HibernateException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Product product = em.find(Product.class, p.getId());
+		product.setName(p.getName());
+		product.setPrice(p.getPrice());
+		em.flush();
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void remove(Product p) throws HibernateException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.remove(p);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

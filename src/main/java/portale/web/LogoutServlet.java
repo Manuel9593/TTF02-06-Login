@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Logout
  */
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="portale.backend.*,portale.web.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="WEB-INF/hellotag.tld" prefix="p"%>
+<%@ taglib uri="./WEB-INF/portal.tld" prefix="p"%>
 <!DOCTYPE html>
-<%
-User u = Utils.checkUser(request, response);
-if (u == null)
-	return;
-// Cart cart = Utils.getCart(request);
-%>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -26,7 +20,7 @@ if (u == null)
 			<div class="container-sm bg-body-secondary pb-3 pt-3 pe-5 ps-5">
 				<jsp:useBean id="cart" class="portale.backend.Cart" scope="session">
 				</jsp:useBean>
-				<p:cart user="${ u }" add="aggiungi.jsp" cart="${ cart }" product="${ p }">
+				<p:cart user="${ u }" add="aggiungi.jsp" cart="${ cart }" product="p">
 					<p:cart-row remove="remove-product?id=" product="${ p }"/>
 				</p:cart>
 				<div>

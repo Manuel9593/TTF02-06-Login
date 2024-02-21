@@ -26,8 +26,7 @@ String passwordError = request.getParameter("update-auth");
 			<div class="fs-5 mb-2">
 				<a href="./home.jsp?user=<%=u.getLogin()%>"
 					class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-					<i class="bi bi-arrow-left-circle"></i>
-					Home
+					<i class="bi bi-arrow-left-circle"></i> Home
 				</a>
 			</div>
 			<div class="pb-3 pt-3">

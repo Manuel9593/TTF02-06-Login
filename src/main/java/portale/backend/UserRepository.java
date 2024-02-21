@@ -1,70 +1,80 @@
 package portale.backend;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.lang.Exception;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-@Slf4j
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserRepository {
-	private Map<String, User> users = new HashMap<>();
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("portale");
 	private static UserRepository instance = null;
-	private Connection con = null;
-	
-	private UserRepository() throws SQLException {
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce", "root", "");
-	}
 	
 	public static UserRepository getInstance() {
 		if (instance == null) {
-			try {
-				instance = new UserRepository();
-			} catch (SQLException e) {
-				log.error("Errore di connessione al DB");
-			}
+			instance = new UserRepository();
 		}
 		return instance;
 	}
 	
-	public void add(User u) {
-		users.put(u.getLogin(), u);
+	public User get(String login) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		User u = em.find(User.class, login);
+		em.close();
+		return u;
+
 	}
 	
-	public User get(String login) {
-		try {
-			PreparedStatement ps = con.prepareStatement("select * from users where login = ?");
-			ps.setString(1, login);
-			ResultSet rs = ps.executeQuery();
-			if(!rs.next())
-				return null;
-			return new User(login, rs.getString("password"), rs.getString("nome"), rs.getString("cognome"));
-		} catch(SQLException sql) {
-			log.error("Errore all'esecuzione della query");
-		}
-		return users.get(login);
-	}
-	
-	public User get(String login, String password) {
-		User u = users.get(login);
+	public User get(String login, String password) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		User u = em.find(User.class, login);
 		if (u != null)
 			if(u.getPassword().equals(password))
 				return u;
+		em.close();
 		return null;
 	}
 	
-	public List<User> getAll(){
-		ArrayList<User> list = new ArrayList<>();
-		users.forEach((key, user) -> list.add(user));
-		return list;
+	public List<User> getAll() throws Exception {
+		EntityManager em = emf.createEntityManager();
+		List<User> res = em.createQuery("select u from User u", User.class).getResultList();
+		em.close();
+		return res;
 	}
-	public void remove(String login) {
-		users.remove(login);
+	
+	public User add(User u) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(u);
+		em.getTransaction().commit();
+		em.close();
+		return u;
+	}
+	
+	public void update(User u) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		User user = em.find(User.class, u.getLogin());
+		user.setLogin(u.getLogin());
+		user.setPassword(u.getPassword());
+		user.setName(u.getName());
+		user.setSurname(u.getSurname());
+		user.setAdmin(u.isAdmin());
+		em.flush();
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void remove(User u) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.remove(u);
+		em.getTransaction().commit();
+		em.close();
 	}
 }
